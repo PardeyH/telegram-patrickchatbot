@@ -6,7 +6,8 @@ public class UserState {
 
     private State state; // Enum representing the user's current state
     private int progress; // User's progress or level
-    private List<String> inventory;
+    private List<String> inventory; //maybe for an inventory system in the future
+
     public UserState() {
         this.state = State.START;
         this.progress = 0;
@@ -14,8 +15,6 @@ public class UserState {
     }
 
     // Getters and setters for state, progress, and inventory
-
-
     public State getState() {
         return state;
     }
@@ -32,6 +31,7 @@ public class UserState {
         this.progress = progress;
     }
 
+    /*
     public void addToInventory(String item) {
         inventory.add(item);
     }
@@ -39,11 +39,5 @@ public class UserState {
     public void removeFromInventory(String item) {
         inventory.remove(item);
     }
-
-    // Additional methods and functionality as per your requirements
-
-    // Add any other relevant fields and methods as needed
-
-    // Constructors, getters, and setters
-
+     */
 }

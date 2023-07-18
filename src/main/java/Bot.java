@@ -21,8 +21,8 @@ public class Bot extends TelegramLongPollingBot {
 
     public void sendText(Long who, String what){
         SendMessage sm = SendMessage.builder()
-                .chatId(who.toString()) //Who are we sending a message to
-                .text(what).build();    //Message content
+                .chatId(who.toString())         //Who are we sending a message to
+                .text(what).build();            //Message content
         try {
             execute(sm);                        //Actually sending the message
         } catch (TelegramApiException e) {
@@ -44,6 +44,7 @@ public class Bot extends TelegramLongPollingBot {
 
                 System.out.println(msgReceived);
 
+                //Start of the game
                 if (msgReceived.toLowerCase().startsWith("start")) {
                     sendResponse(chatId, GameLogic.titleScreen());
                     userState.setProgress(1);
@@ -51,25 +52,29 @@ public class Bot extends TelegramLongPollingBot {
                     break;
                 }
             }
-
+            //User enters his/her/their name
             if (userState.getProgress() == 1 && userState.getState() == State.START) {
                 System.out.println(msgReceived);
-                sendResponse(chatId, GameLogic.choseName(msgReceived));
+                sendResponse(chatId, GameLogic.chooseName(msgReceived));
                 userState.setProgress(2);
                 break;
             }
 
+
             if (userState.getProgress() == 2 && userState.getState() == State.START) {
 
-                if (msgReceived.equalsIgnoreCase("no")) {
+                //Check whether the entered name is correct
+                //
+                if (msgReceived.equalsIgnoreCase("yes")) {
+                    userState.setState(State.PLAYING);
+                    userState.setProgress(0);
+                    sendResponse(chatId, "This is the end for now. Thank you for playing");
+                    System.exit(0); //ends the game loop for now
+                } else {
                     sendResponse(chatId, "Please enter another name:");
                     userState.setProgress(1);
                     break;
-
-                } else {
-                    userState.setState(State.PLAYING);
-                    userState.setProgress(0);
-                    break;
+                    // break;
                 }
 
             }

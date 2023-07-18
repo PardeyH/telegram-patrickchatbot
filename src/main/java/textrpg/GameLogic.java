@@ -6,7 +6,7 @@ public class GameLogic {
 
     static Scanner scanner = new Scanner(System.in);
     static Player player;
-    private static String playerName;
+    public static String playerName;
 
     public GameLogic() {}
 
@@ -50,9 +50,9 @@ public class GameLogic {
 
 
     //getting the player name
-    public static String choseName(String name) {
+    public static String chooseName(String name) {
         playerName = name;
-        return "Your name is " + name + ".\nIs that correct?" +
+        return "Your name is " + name + ". \nIs that correct?" +
                 "Please enter 'Yes' or 'No'!";
     }
 

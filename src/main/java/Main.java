@@ -17,10 +17,10 @@ public class Main {
                 "Type \" start \" to start the game.");  //The L just turns the Integer into a Long
         // */
 
-        // /*
+        /*
         //ID Sezgin
         bot.sendText(5934581428L, "RPG-Bot is running. \n" +
                 "Type \" start \" to start the game.");  //The L just turns the Integer into a Long
-        // */
+        */
     }
 }
