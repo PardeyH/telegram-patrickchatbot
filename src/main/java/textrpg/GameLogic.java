@@ -6,6 +6,7 @@ public class GameLogic {
 
     static Scanner scanner = new Scanner(System.in);
     static Player player;
+    private static String playerName;
 
     public GameLogic() {}
 
@@ -42,33 +43,27 @@ public class GameLogic {
     }
 
     //method to start the game
-    public static String startGame() {
+    public static String titleScreen() {
         //print title screen
         return printHeading("\n\"Text-RPG\" by Patrick\n");
     }
 
 
-        //getting the player name
+    //getting the player name
     public static String choseName(String name) {
-        boolean nameSet = false;
-            return printHeading("Your name is " + name + ".\nIs that correct?");
-        /*    System.out.println("(1) Yes!");
-            System.out.println("(2) No, I want to change my name.");
-            int input = readInt("-> ", 2);
-            if (input == 1)
-                nameSet = true;
-        } while ((!nameSet));
+        playerName = name;
+        return "Your name is " + name + ".\nIs that correct?" +
+                "Please enter 'Yes' or 'No'!";
+    }
 
         //create new player object with the name
-        player = new Player(name);
-        return name;
-
-
-         */
-    }
+        // player = new Player(name);
+        // return name;
 
         //start main game loop
         // gameLoop();
 
-
 }
+
+
+

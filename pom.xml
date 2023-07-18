@@ -20,6 +20,11 @@
             <artifactId>telegrambots</artifactId>
             <version>6.7.0</version>
         </dependency>
+        <dependency>
+            <groupId>nl.basjes.parse.useragent</groupId>
+            <artifactId>yauaa-udf-parent</artifactId>
+            <version>7.19.1</version>
+        </dependency>
     </dependencies>
 
 </project>
