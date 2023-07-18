@@ -56,9 +56,8 @@ public class GameLogic {
                 "Is that correct? Please enter 'Yes' or 'No'!";
     }
 
-    public static String createPlayer() {
+    public static void createPlayer() {
         player = new Player(playerName);
-        return playerName;
     }
 
         //start main game loop

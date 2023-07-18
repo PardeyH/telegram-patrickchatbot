@@ -37,7 +37,6 @@ public class Player extends Character {
             numDefUpgrades++;
         }
     }
-
      */
 
     //Player specific methods
