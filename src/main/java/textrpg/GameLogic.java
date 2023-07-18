@@ -10,21 +10,6 @@ public class GameLogic {
 
     public GameLogic() {}
 
-    //method to get user input from console
-    public static int readInt(String prompt, int userChoices) {
-        int input;
-
-        do {
-            System.out.println(prompt);
-            try {
-                input = Integer.parseInt(scanner.next());
-            } catch (Exception e) {
-                input = -1;
-                System.out.println("Please enter a number!");
-            }
-        } while (input < 1 || input > userChoices);
-        return input;
-    }
 
     //method to print a seperator with length n
     public static String printSeperator(int n) {

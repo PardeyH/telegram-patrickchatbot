@@ -80,7 +80,7 @@ public class Bot extends TelegramLongPollingBot {
 
             if (userState.getProgress() == 0) {
                 sendResponse(chatId, "Created player with name " + GameLogic.playerName);
-                sendResponse(chatId,"Type something to end the game.");
+                sendResponse(chatId, "Type something to end the game.");
                 GameLogic.createPlayer();
                 userState.setProgress(1);
                 break;
