@@ -2,10 +2,17 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import textrpg.GameLogic;
+import textrpg.GameMain;
 
 import java.util.List;
+import java.util.Scanner;
+
+import static textrpg.GameLogic.choseName;
 
 public class Bot extends TelegramLongPollingBot {
+
+    GameLogic rpg;
 
     public void sendText(Long who, String what){
         SendMessage sm = SendMessage.builder()
@@ -20,18 +27,15 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        var msg = update.getMessage();
-        var user = msg.getFrom();
-        var id = user.getId();
 
-        sendText(id, msg.getText());
+        long chatId = update.getMessage().getChatId();
+        String msgReceived = update.getMessage().getText();
+        System.out.println(msgReceived);
 
-        // System.out.println(user.getFirstName() + " wrote " + msg.getText());
-    }
-
-    @Override
-    public void onUpdatesReceived(List<Update> updates) {
-        super.onUpdatesReceived(updates);
+        if (msgReceived.toLowerCase().startsWith("start")) {
+            sendResponse(chatId, GameLogic.startGame());
+            sendResponse(chatId, "Please enter a name: ");
+        }
     }
 
     @Override
@@ -47,5 +51,17 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public void onRegister() {
         super.onRegister();
+    }
+
+    private void sendResponse(long chatId, String s) {
+        SendMessage msg = new SendMessage();
+        msg.setChatId(chatId);
+        msg.setText(s);
+
+        try {
+            execute(msg);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
     }
 }
