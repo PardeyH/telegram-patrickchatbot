@@ -52,13 +52,14 @@ public class GameLogic {
     //getting the player name
     public static String chooseName(String name) {
         playerName = name;
-        return "Your name is " + name + ". \nIs that correct?" +
-                "Please enter 'Yes' or 'No'!";
+        return "Your name is " + name + ". \n" +
+                "Is that correct? Please enter 'Yes' or 'No'!";
     }
 
-        //create new player object with the name
-        // player = new Player(name);
-        // return name;
+    public static String createPlayer() {
+        player = new Player(playerName);
+        return playerName;
+    }
 
         //start main game loop
         // gameLoop();
