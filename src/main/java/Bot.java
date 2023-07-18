@@ -64,6 +64,8 @@ public class Bot extends TelegramLongPollingBot {
 
                 //Check whether the entered name is correct
                 if (msgReceived.equalsIgnoreCase("yes")) {
+                    sendResponse(chatId, "Created player with name " + GameLogic.playerName);
+                    GameLogic.createPlayer();
                     userState.setState(State.PLAYING);
                     userState.setProgress(0);
                 } else {
@@ -79,16 +81,22 @@ public class Bot extends TelegramLongPollingBot {
         while (userState.getState() == State.PLAYING) {
 
             if (userState.getProgress() == 0) {
-                sendResponse(chatId, "Created player with name " + GameLogic.playerName);
-                sendResponse(chatId, "Type something to end the game.");
-                GameLogic.createPlayer();
+                sendResponse(chatId, GameLogic.printMenu());
                 userState.setProgress(1);
                 break;
             }
 
             if (userState.getProgress() == 1) {
-                userState.setProgress(0);
-                userState.setState(State.END);
+                if (msgReceived.equalsIgnoreCase("1")) {
+                    sendResponse(chatId, "Type something to end the game.");
+                    break;
+                } else if (msgReceived.equalsIgnoreCase("2")) {
+                    sendResponse(chatId, GameLogic.characterInfo());
+                    break;
+                } else {
+                    userState.setProgress(0);
+                    userState.setState(State.END);
+                }
             }
         }
 
@@ -98,6 +106,7 @@ public class Bot extends TelegramLongPollingBot {
 
             if (userState.getProgress() == 0) {
                 userState.setProgress(1);
+                //sendResponse(chatId, "Type something to end the game.");
                 sendResponse(chatId, "This is the end for now. Thank you for playing");
                 System.exit(0); //ends the game loop for now
             }

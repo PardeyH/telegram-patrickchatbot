@@ -8,6 +8,8 @@ public class GameLogic {
     static Player player;
     public static String playerName;
 
+    public static boolean isRunning;
+
     public GameLogic() {}
 
 
@@ -45,8 +47,46 @@ public class GameLogic {
         player = new Player(playerName);
     }
 
-        //start main game loop
-        // gameLoop();
+    //method to continue the journey
+    public static void continueJourney() {
+
+    }
+    public static String printMenu() {
+        String menu = "Choose an action:\n" +
+                "1. Continue\n" +
+                "2. Character Info\n" +
+                "3. Exit\n";
+        return menu;
+    }
+
+    public static String characterInfo() {
+        return printHeading("CHARACTER_INFO\n") + "\n"
+                + player.name + "\tHP: " + player.hp + "/" + player.maxHp + "\t"
+                + printSeperator(22) + "\n"
+                + "XP: " + player.xp + "\n"
+                + (player.numAtkUpgrades > 0 ? "Offensive trait: " + player.atkUpgrades[player.numAtkUpgrades - 1] : "")
+                + printSeperator(22) + "\n"
+                + (player.numDefUpgrades > 0 ? "Defensive trait: " + player.defUpgrades[player.numDefUpgrades - 1] : "");
+    }
+
+    //anythingToContinue();
+/*
+    //start main game loop
+    public static void gameLoop() {
+        while(isRunning) {
+            printMenu();
+            int input = readInt("-> ", 3);
+            if (input == 1) {
+                continueJourney;
+            } else if(input == 2) {
+                characterInfo();
+            } else {
+                isRunning = false;
+            }
+        }
+
+    }*/
+
 
 }
 
