@@ -1,5 +1,5 @@
 package textrpg;
 
 public enum State {
-    START, PLAYING, END
+    START, PLAYING, ACT1, END
 }

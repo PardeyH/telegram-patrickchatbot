@@ -2,10 +2,7 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import textrpg.GameLogic;
-import textrpg.Player;
-import textrpg.State;
-import textrpg.UserState;
+import textrpg.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -88,10 +85,13 @@ public class Bot extends TelegramLongPollingBot {
 
             if (userState.getProgress() == 1) {
                 if (msgReceived.equalsIgnoreCase("1")) {
-                    sendResponse(chatId, "Type something to end the game.");
+                    sendResponse(chatId, Story.printIntro());
+                    userState.setState(State.ACT1);
+                    userState.setProgress(0);
                     break;
                 } else if (msgReceived.equalsIgnoreCase("2")) {
                     sendResponse(chatId, GameLogic.characterInfo());
+                    sendResponse(chatId, GameLogic.printMenu());
                     break;
                 } else {
                     userState.setProgress(0);
@@ -99,6 +99,42 @@ public class Bot extends TelegramLongPollingBot {
                 }
             }
         }
+
+        while (userState.getState() == State.ACT1) {
+            if (userState.getProgress() == 0) {
+                if (msgReceived.equalsIgnoreCase("Menu")) {
+                    userState.setProgress(0);
+                    userState.setState(State.PLAYING);
+                    break;
+                } else if (msgReceived.equalsIgnoreCase("Wisdom")) {
+                    sendResponse(chatId, Story.printAct1Wisdom());
+                    userState.setProgress(1);
+                    break;
+                } else if (msgReceived.equalsIgnoreCase("Strength")) {
+                    sendResponse(chatId, Story.printAct1Strength());
+                    userState.setProgress(1);
+                    break;
+                } else if (msgReceived.equalsIgnoreCase("Stealth")) {
+                    sendResponse(chatId, Story.printAct1Stealth());
+                    userState.setProgress(1);
+                    break;
+                } else if (msgReceived.equalsIgnoreCase("Compassion")) {
+                    sendResponse(chatId, Story.printAct1Compassion());
+                    userState.setProgress(1);
+                    break;
+                } else {
+                    userState.setProgress(0);
+                    userState.setState(State.PLAYING);
+                }
+            }
+
+            if (userState.getProgress() == 1) {
+                userState.setProgress(0);
+                userState.setState(State.END);
+                break;
+            }
+        }
+
 
         //Status = userState.END
         //End of the game!! Thank you for playing! :)

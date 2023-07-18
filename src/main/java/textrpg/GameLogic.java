@@ -32,7 +32,11 @@ public class GameLogic {
     //method to start the game
     public static String titleScreen() {
         //print title screen
-        return printHeading("\n\"Text-RPG\" by Patrick\n");
+        return printHeading("""
+
+                "The Enchanted Forest"
+                by Patrick Herbst
+                """);
     }
 
 
@@ -61,7 +65,7 @@ public class GameLogic {
 
     public static String characterInfo() {
         return printHeading("CHARACTER_INFO\n") + "\n"
-                + player.name + "\tHP: " + player.hp + "/" + player.maxHp + "\t"
+                + player.name + "\tHP: " + player.hp + "/" + player.maxHp + "\n"
                 + printSeperator(22) + "\n"
                 + "XP: " + player.xp + "\n"
                 + (player.numAtkUpgrades > 0 ? "Offensive trait: " + player.atkUpgrades[player.numAtkUpgrades - 1] : "")
