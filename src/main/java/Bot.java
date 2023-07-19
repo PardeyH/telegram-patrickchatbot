@@ -33,25 +33,35 @@ public class Bot extends TelegramLongPollingBot {
 
         chatId = update.getMessage().getChatId();
         String msgReceived = update.getMessage().getText();
+        userStates.put(chatId, userState);
+        System.out.println(msgReceived);
 
         //Status = userState.Start
         //the game starts of by showing the title screen and lets the user choose a name
+
+
         while (userState.getState() == State.START) {
 
+            if (msgReceived.equals("/end")) {
+                userState.setState(State.END);
+                break;
+            }
+
+
             if (userState.getProgress() == 0) {
-                System.out.println(msgReceived);
+
                 //Start of the game
-                if (msgReceived.toLowerCase().startsWith("start")) {
                     sendResponse(chatId, GameLogic.titleScreen());
+                    sendResponse(chatId, "You can end the game at any time by entering '/end'");
                     userState.setProgress(1);
                     sendResponse(chatId, "\nPlease enter a name for your character:");
                     break;
-                }
+
             }
 
             //User enters his/her/their name
             if (userState.getProgress() == 1) {
-                System.out.println(msgReceived);
+
                 sendResponse(chatId, GameLogic.chooseName(msgReceived));
                 userState.setProgress(2);
                 break;
@@ -77,6 +87,17 @@ public class Bot extends TelegramLongPollingBot {
         //The actual game loop begins
         while (userState.getState() == State.PLAYING) {
 
+            if (msgReceived.equals("/start")) {
+                userState.setState(State.START);
+                userState.setProgress(0);
+                break;
+            }
+
+            if (msgReceived.equals("/end")) {
+                userState.setState(State.END);
+                break;
+            }
+
             if (userState.getProgress() == 0) {
                 sendResponse(chatId, GameLogic.printMenu());
                 userState.setProgress(1);
@@ -84,6 +105,7 @@ public class Bot extends TelegramLongPollingBot {
             }
 
             if (userState.getProgress() == 1) {
+
                 if (msgReceived.equalsIgnoreCase("1") ||
                         msgReceived.equalsIgnoreCase("Continue")) {
                     sendResponse(chatId, Story.printIntro());
@@ -107,11 +129,21 @@ public class Bot extends TelegramLongPollingBot {
 
         while (userState.getState() == State.ACT1) {
 
+            if (msgReceived.equals("/start")) {
+                userState.setState(State.START);
+                userState.setProgress(0);
+                break;
+            }
+
+            if (msgReceived.equals("/end")) {
+                userState.setState(State.END);
+                break;
+            }
+
             if (userState.getProgress() == 0) {
                 if (msgReceived.equalsIgnoreCase("Menu")) {
                     userState.setProgress(0);
                     userState.setState(State.PLAYING);
-                    break;
                 } else if (msgReceived.equalsIgnoreCase("Wisdom")) {
                     userState.setState(State.WISDOM);
                 } else if (msgReceived.equalsIgnoreCase("Strength")) {
@@ -128,8 +160,21 @@ public class Bot extends TelegramLongPollingBot {
                 }
             }
         }
+
         //The Path of Wisdom
         while (userState.getState() == State.WISDOM) {
+
+            if (msgReceived.equals("/start")) {
+                userState.setState(State.START);
+                userState.setProgress(0);
+                break;
+            }
+
+            if (msgReceived.equals("/end")) {
+                userState.setState(State.END);
+                break;
+            }
+
             if (userState.getProgress() == 0) {
                 sendResponse(chatId, Story.printAct1Wisdom());
                 sendResponse(chatId, "Choose option '1' or '2':");
@@ -183,6 +228,7 @@ public class Bot extends TelegramLongPollingBot {
                     break;
                 }
             }
+
             if (userState.getProgress() == 41) {
                 if (msgReceived.equalsIgnoreCase("1")) {
                     sendResponse(chatId, Story.printAct1WisdomGuards());
@@ -203,6 +249,7 @@ public class Bot extends TelegramLongPollingBot {
                 userState.setProgress(32);
                 break;
             }
+
             if (userState.getProgress() == 32) {
                 if (msgReceived.equalsIgnoreCase("1")) {
                     userState.setProgress(21);
@@ -215,9 +262,20 @@ public class Bot extends TelegramLongPollingBot {
             }
         }
 
-
         //The Path of Strength
         while (userState.getState() == State.STRENGTH) {
+
+            if (msgReceived.equals("/start")) {
+                userState.setState(State.START);
+                userState.setProgress(0);
+                break;
+            }
+
+            if (msgReceived.equals("/end")) {
+                userState.setState(State.END);
+                break;
+            }
+
             if (userState.getProgress() == 0) {
                 sendResponse(chatId, Story.printAct1Strength());
                 userState.setProgress(100);
@@ -226,9 +284,20 @@ public class Bot extends TelegramLongPollingBot {
             }
         }
 
-
         //The Path of Stealth
         while (userState.getState() == State.STEALTH) {
+
+            if (msgReceived.equals("/start")) {
+                userState.setState(State.START);
+                userState.setProgress(0);
+                break;
+            }
+
+            if (msgReceived.equals("/end")) {
+                userState.setState(State.END);
+                break;
+            }
+
             if (userState.getProgress() == 0) {
                 sendResponse(chatId, Story.printAct1Stealth());
                 userState.setProgress(100);
@@ -237,9 +306,20 @@ public class Bot extends TelegramLongPollingBot {
             }
         }
 
-
         //The Path of Compassion
         while (userState.getState() == State.COMPASSION) {
+
+            if (msgReceived.equals("/start")) {
+                userState.setState(State.START);
+                userState.setProgress(0);
+                break;
+            }
+
+            if (msgReceived.equals("/end")) {
+                userState.setState(State.END);
+                break;
+            }
+
             if (userState.getProgress() == 0) {
                 sendResponse(chatId, Story.printAct1Compassion());
                 userState.setProgress(100);
@@ -248,20 +328,25 @@ public class Bot extends TelegramLongPollingBot {
             }
         }
 
-
         //Status = userState.END
         //End of the game!! Thank you for playing! :)
         if (userState.getState() == State.END) {
             if(userState.getProgress() == 99) {
                 sendResponse(chatId, "Congratulations! 🥳 You have won the game!");
-                System.exit(0); //ends the game loop for now
+                userState.setState(State.START);
+                userState.setProgress(0);
+                // System.exit(0); //ends the game loop for now
             } else if (userState.getProgress() == 100) {
                 sendResponse(chatId, "This path is currently not implemented.\n" +
                         "The game ends here.");
-                System.exit(0); //ends the game loop for now
+                userState.setState(State.START);
+                userState.setProgress(0);
+                //System.exit(0); //ends the game loop for now
             } else {
                 sendResponse(chatId, "This is the end for now. Thank you for playing");
-                System.exit(0); //ends the game loop for now
+                userState.setState(State.START);
+                userState.setProgress(0);
+                //System.exit(0); //ends the game loop for now
             }
         }
     }

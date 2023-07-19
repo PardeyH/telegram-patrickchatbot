@@ -4,6 +4,7 @@ package textrpg;
 public class Story {
 
     public static String printIntro() {
+
         return """
                 Once upon a time, in a land far away, there existed a mystical forest shrouded in enchantment and mystery. Legends spoke of a hidden treasure concealed within its depths—a relic said to grant unimaginable power to its possessor. Many brave adventurers had entered the forest in search of this legendary artifact, but few had returned.
 
@@ -27,6 +28,7 @@ public class Story {
                 To get back to the menu, enter 'Menu'
                 """;
     }
+
     public static String printAct1Wisdom() {
 
         return """
@@ -124,7 +126,8 @@ public class Story {
                 You find yourself facing a massive, towering tree blocking your way. Its gnarled branches reach out menacingly, daring you to prove your strength. What will you do?
 
                 Option 1: Confront the tree head-on and engage in combat.
-                Option 2: Look for an alternate route around the tree.""";
+                Option 2: Look for an alternate route around the tree.
+                """;
     }
 
     public static String printAct1Stealth() {
@@ -134,7 +137,8 @@ public class Story {
                 As you move silently along the Path of Stealth, you come across a group of forest guards patrolling the area. They seem unaware of your presence. What action will you take?
 
                 Option 1: Engage the guards in a stealthy takedown.
-                Option 2: Slip past them unnoticed and continue your journey.""";
+                Option 2: Slip past them unnoticed and continue your journey.
+                """;
     }
 
     public static String printAct1Compassion() {
@@ -144,6 +148,7 @@ public class Story {
                 Walking the Path of Compassion, you encounter a wounded creature lying pathetically on the ground. Its eyes meet yours, filled with fear and pain. What will you do?
 
                 Option 1: Offer aid and tend to its wounds.
-                Option 2: Ignore the creature and press on.""";
+                Option 2: Ignore the creature and press on.
+                """;
     }
 }

@@ -5,8 +5,9 @@ import java.util.List;
 public class UserState {
 
     private State state; // Enum representing the user's current state
+
     private int progress; // User's progress or level
-    private List<String> inventory; //maybe for an inventory system in the future
+    // private List<String> inventory; //maybe for an inventory system in the future
 
     public UserState() {
         this.state = State.START;
