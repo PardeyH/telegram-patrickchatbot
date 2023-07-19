@@ -25,7 +25,6 @@ public class Story {
                 Remember, your choices will shape your destiny in this enchanted forest. Choose wisely, for the adventure awaits!
 
                 Enter 'Wisdom', 'Strength', 'Stealth' or 'Compassion'.
-                To get back to the menu, enter 'Menu'
                 """;
     }
 
@@ -47,8 +46,8 @@ public class Story {
 
                 "I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?"
                 
-                Option 1: The answer is "echo."
-                Option 2: The answer is "whisper.
+                Option 1: The answer is "echo".
+                Option 2: The answer is "whisper".
                 """;
     }
 

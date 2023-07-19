@@ -39,36 +39,29 @@ public class Bot extends TelegramLongPollingBot {
         //Status = userState.Start
         //the game starts of by showing the title screen and lets the user choose a name
 
-
         while (userState.getState() == State.START) {
-
             if (msgReceived.equals("/end")) {
                 userState.setState(State.END);
                 break;
             }
 
-
             if (userState.getProgress() == 0) {
-
                 //Start of the game
                     sendResponse(chatId, GameLogic.titleScreen());
                     sendResponse(chatId, "You can end the game at any time by entering '/end'");
                     userState.setProgress(1);
                     sendResponse(chatId, "\nPlease enter a name for your character:");
                     break;
-
             }
 
             //User enters his/her/their name
             if (userState.getProgress() == 1) {
-
                 sendResponse(chatId, GameLogic.chooseName(msgReceived));
                 userState.setProgress(2);
                 break;
             }
 
             if (userState.getProgress() == 2) {
-
                 //Check whether the entered name is correct
                 if (msgReceived.equalsIgnoreCase("yes")) {
                     sendResponse(chatId, "Created player with name " + GameLogic.playerName);
@@ -86,7 +79,6 @@ public class Bot extends TelegramLongPollingBot {
         //Status = userState.PLAYING
         //The actual game loop begins
         while (userState.getState() == State.PLAYING) {
-
             if (msgReceived.equals("/start")) {
                 userState.setState(State.START);
                 userState.setProgress(0);
@@ -105,7 +97,6 @@ public class Bot extends TelegramLongPollingBot {
             }
 
             if (userState.getProgress() == 1) {
-
                 if (msgReceived.equalsIgnoreCase("1") ||
                         msgReceived.equalsIgnoreCase("Continue")) {
                     sendResponse(chatId, Story.printIntro());
@@ -128,7 +119,6 @@ public class Bot extends TelegramLongPollingBot {
         }
 
         while (userState.getState() == State.ACT1) {
-
             if (msgReceived.equals("/start")) {
                 userState.setState(State.START);
                 userState.setProgress(0);
@@ -141,10 +131,7 @@ public class Bot extends TelegramLongPollingBot {
             }
 
             if (userState.getProgress() == 0) {
-                if (msgReceived.equalsIgnoreCase("Menu")) {
-                    userState.setProgress(0);
-                    userState.setState(State.PLAYING);
-                } else if (msgReceived.equalsIgnoreCase("Wisdom")) {
+                } if (msgReceived.equalsIgnoreCase("Wisdom")) {
                     userState.setState(State.WISDOM);
                 } else if (msgReceived.equalsIgnoreCase("Strength")) {
                     userState.setState(State.STRENGTH);
@@ -158,12 +145,11 @@ public class Bot extends TelegramLongPollingBot {
                             "So please enter 'Wisdom'.");
                     break;
                 }
-            }
+
         }
 
         //The Path of Wisdom
         while (userState.getState() == State.WISDOM) {
-
             if (msgReceived.equals("/start")) {
                 userState.setState(State.START);
                 userState.setProgress(0);
@@ -264,7 +250,6 @@ public class Bot extends TelegramLongPollingBot {
 
         //The Path of Strength
         while (userState.getState() == State.STRENGTH) {
-
             if (msgReceived.equals("/start")) {
                 userState.setState(State.START);
                 userState.setProgress(0);
@@ -286,7 +271,6 @@ public class Bot extends TelegramLongPollingBot {
 
         //The Path of Stealth
         while (userState.getState() == State.STEALTH) {
-
             if (msgReceived.equals("/start")) {
                 userState.setState(State.START);
                 userState.setProgress(0);
@@ -308,7 +292,6 @@ public class Bot extends TelegramLongPollingBot {
 
         //The Path of Compassion
         while (userState.getState() == State.COMPASSION) {
-
             if (msgReceived.equals("/start")) {
                 userState.setState(State.START);
                 userState.setProgress(0);

@@ -21,6 +21,7 @@ public class GameLogic {
     //method to print a heading
     public static String printHeading(String title) {
         StringBuilder heading = new StringBuilder(printSeperator(22));
+        heading.append("\n");
         heading.append(title);
         heading.append(printSeperator(22));
         return heading.toString();
