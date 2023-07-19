@@ -84,52 +84,165 @@ public class Bot extends TelegramLongPollingBot {
             }
 
             if (userState.getProgress() == 1) {
-                if (msgReceived.equalsIgnoreCase("1")) {
+                if (msgReceived.equalsIgnoreCase("1") ||
+                        msgReceived.equalsIgnoreCase("Continue")) {
                     sendResponse(chatId, Story.printIntro());
                     userState.setState(State.ACT1);
                     userState.setProgress(0);
                     break;
-                } else if (msgReceived.equalsIgnoreCase("2")) {
+                } else if (msgReceived.equalsIgnoreCase("2")||
+                        msgReceived.equalsIgnoreCase("Character Info")) {
                     sendResponse(chatId, GameLogic.characterInfo());
                     sendResponse(chatId, GameLogic.printMenu());
                     break;
-                } else {
-                    userState.setProgress(0);
+                } else if (msgReceived.equalsIgnoreCase("3")||
+                        msgReceived.equalsIgnoreCase("Exit")) {
                     userState.setState(State.END);
+                    break;
+                } else {
+                    sendResponse(chatId, "Please enter a valid option:");
                 }
             }
         }
 
         while (userState.getState() == State.ACT1) {
+
             if (userState.getProgress() == 0) {
                 if (msgReceived.equalsIgnoreCase("Menu")) {
                     userState.setProgress(0);
                     userState.setState(State.PLAYING);
                     break;
                 } else if (msgReceived.equalsIgnoreCase("Wisdom")) {
-                    sendResponse(chatId, Story.printAct1Wisdom());
-                    userState.setProgress(1);
-                    break;
+                    userState.setState(State.WISDOM);
                 } else if (msgReceived.equalsIgnoreCase("Strength")) {
-                    sendResponse(chatId, Story.printAct1Strength());
-                    userState.setProgress(1);
-                    break;
+                    userState.setState(State.STRENGTH);
                 } else if (msgReceived.equalsIgnoreCase("Stealth")) {
-                    sendResponse(chatId, Story.printAct1Stealth());
-                    userState.setProgress(1);
-                    break;
+                    userState.setState(State.STEALTH);
                 } else if (msgReceived.equalsIgnoreCase("Compassion")) {
-                    sendResponse(chatId, Story.printAct1Compassion());
-                    userState.setProgress(1);
-                    break;
+                    userState.setState(State.COMPASSION);
                 } else {
-                    userState.setProgress(0);
-                    userState.setState(State.PLAYING);
+                    sendResponse(chatId, "Please enter a valid option:");
+                    sendResponse(chatId, "Only 'The Path of Wisdom' is currently fully supported.\n" +
+                            "So please enter 'Wisdom'.");
+                    break;
                 }
+            }
+        }
+        //The Path of Wisdom
+        while (userState.getState() == State.WISDOM) {
+            if (userState.getProgress() == 0) {
+                sendResponse(chatId, Story.printAct1Wisdom());
+                sendResponse(chatId, "Choose option '1' or '2':");
+                userState.setProgress(1);
+                break;
             }
 
             if (userState.getProgress() == 1) {
-                userState.setProgress(0);
+                if (msgReceived.equalsIgnoreCase("1")) {
+                    sendResponse(chatId, Story.printAct1Wisdom1());
+                    sendResponse(chatId, "Choose option '1' or '2':");
+                    userState.setProgress(11);
+                    break;
+                } else if (msgReceived.equalsIgnoreCase("2")) {
+                    userState.setProgress(22);
+                } else {
+                    sendResponse(chatId, "Please enter a valid option:");
+                    break;
+                }
+            }
+            if (userState.getProgress() == 11) {
+                if (msgReceived.equalsIgnoreCase("1")) {
+                    sendResponse(chatId, Story.printAct1WisdomEcho());
+                    userState.setProgress(21);
+                } else if (msgReceived.equalsIgnoreCase("2")) {
+                    sendResponse(chatId, Story.printAct1WisdomWhisper());
+                    userState.setProgress(22);
+                } else {
+                    sendResponse(chatId, "Please enter a valid option:");
+                    break;
+                }
+            }
+
+            if (userState.getProgress() == 21) {
+                sendResponse(chatId, Story.printAct1WisdomHiddenRoom());
+                sendResponse(chatId, "Choose option '1' or '2':");
+                userState.setProgress(31);
+                break;
+            }
+
+            if (userState.getProgress() == 31) {
+                if (msgReceived.equalsIgnoreCase("1")) {
+                    sendResponse(chatId, Story.printAct1WisdomOrb());
+                    userState.setProgress(41);
+                    sendResponse(chatId, "Choose option '1' or '2':");
+                    break;
+                } else if (msgReceived.equalsIgnoreCase("2")) {
+                    userState.setState(State.END);
+                } else {
+                    sendResponse(chatId, "Please enter a valid option:");
+                    break;
+                }
+            }
+            if (userState.getProgress() == 41) {
+                if (msgReceived.equalsIgnoreCase("1")) {
+                    sendResponse(chatId, Story.printAct1WisdomGuards());
+                    userState.setProgress(99);
+                    userState.setState(State.END);
+                } else if (msgReceived.equalsIgnoreCase("2")) {
+                    userState.setProgress(99);
+                    userState.setState(State.END);
+                } else {
+                    sendResponse(chatId, "Please enter a valid option:");
+                    break;
+                }
+            }
+
+            if (userState.getProgress() == 22) {
+                sendResponse(chatId, Story.printAct1WisdomLibrary());
+                sendResponse(chatId, "Choose option '1' or '2':");
+                userState.setProgress(32);
+                break;
+            }
+            if (userState.getProgress() == 32) {
+                if (msgReceived.equalsIgnoreCase("1")) {
+                    userState.setProgress(21);
+                } else if (msgReceived.equalsIgnoreCase("2")) {
+                    userState.setState(State.END);
+                } else {
+                    sendResponse(chatId, "Please enter a valid option:");
+                    break;
+                }
+            }
+        }
+
+
+        //The Path of Strength
+        while (userState.getState() == State.STRENGTH) {
+            if (userState.getProgress() == 0) {
+                sendResponse(chatId, Story.printAct1Strength());
+                userState.setProgress(100);
+                userState.setState(State.END);
+                break;
+            }
+        }
+
+
+        //The Path of Stealth
+        while (userState.getState() == State.STEALTH) {
+            if (userState.getProgress() == 0) {
+                sendResponse(chatId, Story.printAct1Stealth());
+                userState.setProgress(100);
+                userState.setState(State.END);
+                break;
+            }
+        }
+
+
+        //The Path of Compassion
+        while (userState.getState() == State.COMPASSION) {
+            if (userState.getProgress() == 0) {
+                sendResponse(chatId, Story.printAct1Compassion());
+                userState.setProgress(100);
                 userState.setState(State.END);
                 break;
             }
@@ -138,11 +251,15 @@ public class Bot extends TelegramLongPollingBot {
 
         //Status = userState.END
         //End of the game!! Thank you for playing! :)
-        while (userState.getState() == State.END) {
-
-            if (userState.getProgress() == 0) {
-                userState.setProgress(1);
-                //sendResponse(chatId, "Type something to end the game.");
+        if (userState.getState() == State.END) {
+            if(userState.getProgress() == 99) {
+                sendResponse(chatId, "Congratulations! 🥳 You have won the game!");
+                System.exit(0); //ends the game loop for now
+            } else if (userState.getProgress() == 100) {
+                sendResponse(chatId, "This path is currently not implemented.\n" +
+                        "The game ends here.");
+                System.exit(0); //ends the game loop for now
+            } else {
                 sendResponse(chatId, "This is the end for now. Thank you for playing");
                 System.exit(0); //ends the game loop for now
             }

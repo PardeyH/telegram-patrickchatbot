@@ -8,10 +8,7 @@ public class GameLogic {
     static Player player;
     public static String playerName;
 
-    public static boolean isRunning;
-
     public GameLogic() {}
-
 
     //method to print a seperator with length n
     public static String printSeperator(int n) {
@@ -39,7 +36,6 @@ public class GameLogic {
                 """);
     }
 
-
     //getting the player name
     public static String chooseName(String name) {
         playerName = name;
@@ -51,16 +47,11 @@ public class GameLogic {
         player = new Player(playerName);
     }
 
-    //method to continue the journey
-    public static void continueJourney() {
-
-    }
     public static String printMenu() {
-        String menu = "Choose an action:\n" +
+        return "Choose an action:\n" +
                 "1. Continue\n" +
                 "2. Character Info\n" +
                 "3. Exit\n";
-        return menu;
     }
 
     public static String characterInfo() {
@@ -72,26 +63,6 @@ public class GameLogic {
                 + printSeperator(22) + "\n"
                 + (player.numDefUpgrades > 0 ? "Defensive trait: " + player.defUpgrades[player.numDefUpgrades - 1] : "");
     }
-
-    //anythingToContinue();
-/*
-    //start main game loop
-    public static void gameLoop() {
-        while(isRunning) {
-            printMenu();
-            int input = readInt("-> ", 3);
-            if (input == 1) {
-                continueJourney;
-            } else if(input == 2) {
-                characterInfo();
-            } else {
-                isRunning = false;
-            }
-        }
-
-    }*/
-
-
 }
 
 
