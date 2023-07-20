@@ -312,6 +312,7 @@ public class Bot extends TelegramLongPollingBot {
                 sendResponse(chatId, "Please enter a valid option:");
                 sendResponse(chatId, "Only 'The Path of Wisdom' is currently fully supported.\n" +
                         "So please enter 'Wisdom'.");
+
                 break;
             }
         }
