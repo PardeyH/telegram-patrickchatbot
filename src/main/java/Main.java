@@ -10,7 +10,6 @@ public class Main {
         Bot bot = new Bot();                  //We moved this line out of the register method, to access it later
         botsApi.registerBot(bot);
 
-
         /*
         //ID Patrick
         bot.sendText(6341326992L, "RPG-Bot is running... \n" +

@@ -38,7 +38,6 @@ public class Bot extends TelegramLongPollingBot {
 
         //Status = userState.Start
         //the game starts of by showing the title screen and lets the user choose a name
-
         while (userState.getState() == State.START) {
             if (msgReceived.equals("/end")) {
                 userState.setState(State.END);
@@ -263,8 +262,10 @@ public class Bot extends TelegramLongPollingBot {
 
             if (userState.getProgress() == 0) {
                 sendResponse(chatId, Story.printAct1Strength());
-                userState.setProgress(100);
-                userState.setState(State.END);
+                userState.setState(State.ACT1);
+                sendResponse(chatId, "Please enter a valid option:");
+                sendResponse(chatId, "Only 'The Path of Wisdom' is currently fully supported.\n" +
+                        "So please enter 'Wisdom'.");
                 break;
             }
         }
@@ -284,8 +285,10 @@ public class Bot extends TelegramLongPollingBot {
 
             if (userState.getProgress() == 0) {
                 sendResponse(chatId, Story.printAct1Stealth());
-                userState.setProgress(100);
-                userState.setState(State.END);
+                userState.setState(State.ACT1);
+                sendResponse(chatId, "Please enter a valid option:");
+                sendResponse(chatId, "Only 'The Path of Wisdom' is currently fully supported.\n" +
+                        "So please enter 'Wisdom'.");
                 break;
             }
         }
@@ -305,8 +308,10 @@ public class Bot extends TelegramLongPollingBot {
 
             if (userState.getProgress() == 0) {
                 sendResponse(chatId, Story.printAct1Compassion());
-                userState.setProgress(100);
-                userState.setState(State.END);
+                userState.setState(State.ACT1);
+                sendResponse(chatId, "Please enter a valid option:");
+                sendResponse(chatId, "Only 'The Path of Wisdom' is currently fully supported.\n" +
+                        "So please enter 'Wisdom'.");
                 break;
             }
         }
