@@ -340,15 +340,7 @@ public class Bot extends TelegramLongPollingBot {
         }
     }
 
-    @Override
-    public String getBotUsername () {
-        return "patrickchatbot";
-    }
-
-    @Override
-    public String getBotToken () {
-        return "6048269057:AAFTlZasLKrp1HaTUGHT3QPH10LI-Ji_PNw";
-    }
+    //removed methods with token
 
     @Override
     public void onRegister () {
